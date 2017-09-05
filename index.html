@@ -28,7 +28,7 @@ body {
 
 .header {
   position: fixed;
-  background: #111;
+  background-color: rgba(17, 17, 17, 0.8);
   z-index: 2;
   width: 100%;
 }
@@ -97,9 +97,11 @@ body {
 .container pre {
   border-top: 10px solid #545456;
   color: #111;
+  font-size: .6em;
 }
 
 #code-button {
+  z-index: 2;
   position: absolute;
   right: 0%;
   margin-top: 2%;
@@ -121,6 +123,7 @@ body {
 #me {
   border-top: 10px solid #545456;
   padding: 2% 0;
+  animation: fadeIn 1s ease 0s 1 normal;
 }
 #me img {
   width: 15%;
@@ -129,6 +132,59 @@ body {
   margin-bottom: 3%;
 }
 
+#roles {
+  border-top: 10px solid #545456;
+  padding: 2% 0;
+}
+@media screen and (min-width: 1024px) {
+  #roles {
+    display: flex;
+  }
+}
+#roles .role {
+  position: relative;
+}
+@media screen and (min-width: 1024px) {
+  #roles .role {
+    flex: 1 1 auto;
+  }
+}
+#roles .role img {
+  height: 428.57143px;
+  object-fit: cover;
+  filter: grayscale(120%) contrast(100%);
+  box-shadow: 10px 15px 25px 0 rgba(0, 0, 0, 0.2);
+}
+@media screen and (min-width: 1024px) {
+  #roles .role img {
+    max-width: 428.57143px;
+  }
+}
+#roles .role .on-img {
+  color: #fafafa;
+  font-size: 32px;
+  padding: 2%;
+  max-width: 428.57143px;
+  top: 0%;
+  height: 428.57143px;
+  position: absolute;
+  animation: fadeIn 1s ease 0s 1 normal;
+  background-color: rgba(17, 17, 17, 0.4);
+}
+@media screen and (min-width: 1024px) {
+  #roles .role .on-img {
+    max-width: 290.32258px;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}
 .hidden {
   opacity: 0;
 }
@@ -144,15 +200,11 @@ common function
 **********************************/
 body {
   font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+  font-size: 2em;
 }
-@media screen and (min-width: 1025px) {
+@media screen and (min-width: 1024px) {
   body {
     font-size: 1em;
-  }
-}
-@media screen and (max-width: 1024px) {
-  body {
-    font-size: 2em;
   }
 }
 body a {
@@ -217,6 +269,9 @@ body i {
 
 
 
+
+
+
 <div class="header">
   <p><a href="http://syunsukekobashi.me">syunsukekobashi.me</a><a href="https://about.me/syunsukekobashi" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a><a href="https://gist.github.com/ksyunnnn/ee10cfac76f6cfbcadc9723b33e6f408" target="_blank"><i class="fa fa-code" aria-hidden="true"></i></a></p>
 </div>
@@ -239,33 +294,46 @@ body i {
       <div id="code-button" style="display:none" ontouchstart="" v-on:click="switchJson"><i class="fa fa-code" aria-hidden="true"></i></div>
       <pre id="json" style="display:none">{{ display }}</pre>
       <div id="error" style="display:none">
-        <h2>error</h2>
+        <h2>errorrrrr</h2>
       </div>
       <div id="me" style="display:none"><img v-bind:src="display.image"/>
         <h5>{{ display.name }}</h5>
         <div class="address">
           <li v-for="(item, index) in display.address">{{ index }}<i class="fa fa-angle-double-right" aria-hidden="true"></i>{{ item }}</li>
         </div>
-        <div class="url"><span v-for="(item, index) in display.url"><a v-bind:href="item">{{ index }}</a>/ </span></div>
+        <div class="url"><span v-for="(item, index) in display.url"><a v-bind:href="item" target="_blank">{{ index }}</a>/ </span></div>
       </div>
-      <div id="roles" style="display:none"></div>
+      <div id="roles" style="display:none">
+        <div class="role" v-for="(item, index) in display"><img v-bind:src="item.image"/>
+          <div class="on-img">
+            <h2>{{ item.title }}</h2>
+            <p v-if="item.url"><a v-bind:href="item.url" target="_blank">{{ item.desc }}</a></p>
+            <p v-else="item.url">{{ item.desc }}</p>
+          </div>
+        </div>
+      </div>
       <div id="skill" style="display:none"></div>
       <div id="components" style="display:none"></div>
       <div id="favorites" style="display:none"></div>
+      <div id="hire" v-on:click="window.open('https://about.me/syunsukekobashi', '_blank');" ontouchstart="">
+        <div class="button">Do you wanna hire me?</div>
+      </div>
     </div>
   </div>
 </div>
 
 
-</body>
 
+</body>
 <script type="text/javascript">
+
 function getJson(uri) {
 
   // 書き直したいとこ
   var data = {
-    me: '{ "status": "OK", "uri": "me", "message": "This is about me,ksyunnnn.", "data": { "name": "SYUNSUKE KOBASHI", "gender": "male", "image": "https://pbs.twimg.com/profile_images/888337750939672576/HA1Stz8r_400x400.jpg","address": { "city": "Setagaya", "state": "Tokyo", "tel": "080-8884-1340" }, "url": { "facebook": "https://www.facebook.com/ksyunnnn", "medium": "https://medium.com/syunsukekobashi", "twitter": "https://twitter.com/ksyunnnn", "codepen": "https://codepen.io/ksyunnnn", "github": "https://github.com/ksyunnnn", "stackoverflow": "https://stackoverflow.com/users/7687813/kobashi-syunsuke", "qiita": "http://qiita.com/ksyunnnn", "wantedly": "https://www.wantedly.com/users/312856", "linkedin": "https://www.linkedin.com/in/ksyunnnn", "angellist": "https://angel.co/ksyunnnn", "aboutme": "https://about.me/kobashisyunsuke" } }}'
+    me: '{ "status": "OK", "uri": "me", "message": "This is about me,ksyunnnn.", "data": { "name": "SYUNSUKE KOBASHI", "gender": "male", "image": "https://pbs.twimg.com/profile_images/888337750939672576/HA1Stz8r_400x400.jpg","address": { "city": "Setagaya", "state": "Tokyo", "tel": "080-8884-1340" }, "url": { "facebook": "https://www.facebook.com/ksyunnnn", "medium": "https://medium.com/syunsukekobashi", "twitter": "https://twitter.com/ksyunnnn", "codepen": "https://codepen.io/ksyunnnn", "github": "https://github.com/ksyunnnn", "stackoverflow": "https://stackoverflow.com/users/7687813/kobashi-syunsuke", "qiita": "http://qiita.com/ksyunnnn", "wantedly": "https://www.wantedly.com/users/312856", "linkedin": "https://www.linkedin.com/in/ksyunnnn", "angellist": "https://angel.co/ksyunnnn", "aboutme": "https://about.me/kobashisyunsuke" } }}',roles:'{ "status": "OK", "uri": "me", "message": "This is about me,ksyunnnn.", "data": [ { "title": "web developer", "desc": "I am a developer who building web apps.", "image": "https://i.imgur.com/MeM2aBx.jpg" }, { "title": "community creator", "desc": "I have community that have 150 over people.", "image": "https://i.imgur.com/iaITmSx.jpg", "url": "https://techplay.jp/community/%E5%B0%8F%E6%A9%8B%20%E4%BF%8A%E4%BB%8B" } ]}'
   }
+
 
 
   if(!data[uri]){
@@ -292,18 +360,18 @@ var app = new Vue({
         // remove before one
         document.getElementById(this.uri).style.display = "none"
         document.getElementById("error").style.display = "none"
-        
+
         // new one
         this.uri = event.target.innerHTML
         this.message = this.uri
-        
+
         // get json as obj
         var obj = JSON.parse(getJson(this.uri))
         this.status = obj.status
-        
+
         if(this.status == "NG"){
           document.getElementById("error").style.display = ""
-          
+
         }else{
           this.display = obj.data
           document.getElementById(this.uri).style.display = ""
@@ -318,7 +386,7 @@ var app = new Vue({
         this.uri = event.target.value
         this.message = this.uri
         this.display = JSON.parse(getJson(this.uri)).data
-        
+
         document.getElementById(this.uri).style.display = ""
         document.getElementById("code-button").style.display = ""
         document.getElementById("json").style.display = "none"
@@ -389,5 +457,6 @@ function consoleText(words, id, colors) {
     }
   }, 400)
 }
+
 </script>
 
