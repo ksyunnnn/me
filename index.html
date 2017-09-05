@@ -1,0 +1,393 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+
+<script>
+  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+  ga('create', 'UA-103165630-1', 'auto');
+  ga('send', 'pageview');
+
+</script>
+
+<style type="text/css">
+
+@charset "UTF-8";
+@font-face {
+  font-family: "Yu Gothic";
+  src: local("Yu Gothic Medium");
+  font-weight: 400;
+}
+body {
+  background: #111;
+  color: #fff;
+}
+
+.header {
+  position: fixed;
+  background: #111;
+  z-index: 2;
+  width: 100%;
+}
+
+.container {
+  font-family: Khula;
+  font-size: 2em;
+  height: 60%;
+  display: block;
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  margin: auto;
+  max-width: 900px;
+}
+.container p.msg {
+  margin: 0;
+  padding-left: 10px;
+}
+.container .buttons {
+  font-size: .7em;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  align-content: center;
+  flex-wrap: wrap;
+}
+.container .button {
+  flex: 1 1 auto;
+  margin: 20px 0px;
+  padding: 10px;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+  transition: .3s;
+}
+.container .button:after {
+  position: absolute;
+  transition: .3s;
+  content: '';
+  width: 0;
+  left: 50%;
+  bottom: 0;
+  height: 3px;
+  background: #f7f7f7;
+  height: 120%;
+  left: -10%;
+  transform: skewX(15deg);
+  z-index: -1;
+}
+.container .button:hover, .container .button:active {
+  cursor: pointer;
+  color: #111;
+}
+.container .button:hover:after, .container .button:active:after {
+  left: -10%;
+  width: 120%;
+}
+.container input {
+  width: 93.5%;
+  background: #191919;
+  color: #545456;
+}
+.container pre {
+  border-top: 10px solid #545456;
+  color: #111;
+}
+
+#code-button {
+  position: absolute;
+  right: 0%;
+  margin-top: 2%;
+  mix-blend-mode: difference;
+  transition: .3s;
+  transform: rotate(340deg);
+  border: 1px solid;
+}
+#code-button i {
+  font-size: 1.2em;
+}
+#code-button:hover, #code-button:active {
+  cursor: pointer;
+  color: #fafafa;
+  border: .1em solid;
+  transform: rotate(360deg);
+}
+
+#me {
+  border-top: 10px solid #545456;
+  padding: 2% 0;
+}
+#me img {
+  width: 15%;
+}
+#me .address {
+  margin-bottom: 3%;
+}
+
+.hidden {
+  opacity: 0;
+}
+
+.console-underscore {
+  display: inline-block;
+  position: relative;
+  top: -0.14em;
+}
+
+/**********************************
+common function
+**********************************/
+body {
+  font-family: "Yu Gothic", "游ゴシック", YuGothic, "游ゴシック体", "ヒラギノ角ゴ Pro W3", "メイリオ", sans-serif;
+}
+@media screen and (min-width: 1025px) {
+  body {
+    font-size: 1em;
+  }
+}
+@media screen and (max-width: 1024px) {
+  body {
+    font-size: 2em;
+  }
+}
+body a {
+  text-decoration: none;
+  color: inherit;
+}
+body a:hover {
+  text-decoration: underline;
+}
+body img {
+  width: 100%;
+}
+body li {
+  list-style: none;
+}
+body pre {
+  overflow-x: auto;
+  margin: 0;
+  padding: .6em 1.2em;
+  border: 0;
+  border-radius: 3px;
+  background-color: #f7f7f7;
+  white-space: pre;
+  word-wrap: normal;
+  font-size: .8em;
+  font-family: Consolas,Liberation Mono,Menlo,Courier,monospace;
+  line-height: 1.2;
+}
+body b.red {
+  color: red;
+}
+body b.green {
+  color: green;
+}
+body b.blue {
+  color: blue;
+}
+body section, body .container input, .container body input {
+  margin: 0;
+  padding: .6em 1.2em;
+  border: 0;
+  border-radius: 3px;
+  font-size: .8em;
+  line-height: 1.5;
+}
+body i {
+  padding: .3em;
+}
+
+</style>
+
+
+    <meta charset="utf-8">
+    <title>@ksyunnnn</title>
+
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet" />
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/vue/2.3.4/vue.min.js"></script>
+
+</head>
+<body>
+
+
+
+<div class="header">
+  <p><a href="http://syunsukekobashi.me">syunsukekobashi.me</a><a href="https://about.me/syunsukekobashi" target="_blank"><i class="fa fa-external-link" aria-hidden="true"></i></a><a href="https://gist.github.com/ksyunnnn/ee10cfac76f6cfbcadc9723b33e6f408" target="_blank"><i class="fa fa-code" aria-hidden="true"></i></a></p>
+</div>
+<div class="container">
+  <div id="app-io">
+    <div class="console-container"><span id="motion-msg"></span>
+      <div class="console-underscore" id="console">&#95</div>
+    </div>
+    <div class="buttons">
+      <div class="button" v-on:click="getUriByButton" ontouchstart="">me</div>
+      <div class="button" v-on:click="getUriByButton" ontouchstart="">roles</div>
+      <div class="button" v-on:click="getUriByButton" ontouchstart="">skill</div>
+      <div class="button" v-on:click="getUriByButton" ontouchstart="">components</div>
+      <div class="button" v-on:click="getUriByButton" ontouchstart="">favorites</div>
+    </div>
+    <div class="search">
+      <input id="input-uri" v-bind:value="message" v-on:keyup.enter="getUriByInput"/>
+    </div>
+    <div class="contents">
+      <div id="code-button" style="display:none" ontouchstart="" v-on:click="switchJson"><i class="fa fa-code" aria-hidden="true"></i></div>
+      <pre id="json" style="display:none">{{ display }}</pre>
+      <div id="error" style="display:none">
+        <h2>error</h2>
+      </div>
+      <div id="me" style="display:none"><img v-bind:src="display.image"/>
+        <h5>{{ display.name }}</h5>
+        <div class="address">
+          <li v-for="(item, index) in display.address">{{ index }}<i class="fa fa-angle-double-right" aria-hidden="true"></i>{{ item }}</li>
+        </div>
+        <div class="url"><span v-for="(item, index) in display.url"><a v-bind:href="item">{{ index }}</a>/ </span></div>
+      </div>
+      <div id="roles" style="display:none"></div>
+      <div id="skill" style="display:none"></div>
+      <div id="components" style="display:none"></div>
+      <div id="favorites" style="display:none"></div>
+    </div>
+  </div>
+</div>
+
+
+</body>
+
+<script type="text/javascript">
+function getJson(uri) {
+
+  // 書き直したいとこ
+  var data = {
+    me: '{ "status": "OK", "uri": "me", "message": "This is about me,ksyunnnn.", "data": { "name": "SYUNSUKE KOBASHI", "gender": "male", "image": "https://pbs.twimg.com/profile_images/888337750939672576/HA1Stz8r_400x400.jpg","address": { "city": "Setagaya", "state": "Tokyo", "tel": "080-8884-1340" }, "url": { "facebook": "https://www.facebook.com/ksyunnnn", "medium": "https://medium.com/syunsukekobashi", "twitter": "https://twitter.com/ksyunnnn", "codepen": "https://codepen.io/ksyunnnn", "github": "https://github.com/ksyunnnn", "stackoverflow": "https://stackoverflow.com/users/7687813/kobashi-syunsuke", "qiita": "http://qiita.com/ksyunnnn", "wantedly": "https://www.wantedly.com/users/312856", "linkedin": "https://www.linkedin.com/in/ksyunnnn", "angellist": "https://angel.co/ksyunnnn", "aboutme": "https://about.me/kobashisyunsuke" } }}'
+  }
+
+
+  if(!data[uri]){
+    var obj = JSON.parse('{ "status": "NG", "data":{ "error" : "Sorry, this resource does not exist."}}')
+    var responce = JSON.stringify(obj, null, "  ")
+    return responce
+  }
+  var obj = JSON.parse(data[uri])
+  var responce = JSON.stringify(obj, null, "  ")
+
+  return responce
+}
+var app = new Vue({
+  el: '#app-io',
+  data: {
+    uri: 'me',
+    message: '',
+    display: '',
+    status: 'OK'
+  },
+  methods: {
+    getUriByButton: function (event) {
+      if (event) {
+        // remove before one
+        document.getElementById(this.uri).style.display = "none"
+        document.getElementById("error").style.display = "none"
+        
+        // new one
+        this.uri = event.target.innerHTML
+        this.message = this.uri
+        
+        // get json as obj
+        var obj = JSON.parse(getJson(this.uri))
+        this.status = obj.status
+        
+        if(this.status == "NG"){
+          document.getElementById("error").style.display = ""
+          
+        }else{
+          this.display = obj.data
+          document.getElementById(this.uri).style.display = ""
+        }
+
+        document.getElementById("code-button").style.display = ""
+        document.getElementById("json").style.display = "none"
+      }
+    },
+    getUriByInput: function (event) {
+      if (event) {
+        this.uri = event.target.value
+        this.message = this.uri
+        this.display = JSON.parse(getJson(this.uri)).data
+        
+        document.getElementById(this.uri).style.display = ""
+        document.getElementById("code-button").style.display = ""
+        document.getElementById("json").style.display = "none"
+      }
+    },
+    switchJson: function (event) {
+      if (event) {
+        // uri のコンテンツが非表示
+        if(document.getElementById(this.uri).style.display == "none"){
+          document.getElementById(this.uri).style.display = ""
+          document.getElementById("json").style.display = "none"
+        }else{
+          document.getElementById(this.uri).style.display = "none"
+          document.getElementById("json").style.display = ""
+        }
+      }
+    }
+  }
+})
+consoleText(['select resource.'], 'motion-msg',['white']);
+
+// 動くテキスト
+function consoleText(words, id, colors) {
+  if (colors === undefined) colors = ['#fff'];
+  var visible = true;
+  var con = document.getElementById('console');
+  var letterCount = 1;
+  var x = 1;
+  var waiting = false;
+  var target = document.getElementById(id)
+  target.setAttribute('style', 'color:' + colors[0])
+  window.setInterval(function() {
+
+    if (letterCount === 0 && waiting === false) {
+      waiting = true;
+      target.innerHTML = words[0].substring(0, letterCount)
+      window.setTimeout(function() {
+        var usedColor = colors.shift();
+        colors.push(usedColor);
+        var usedWord = words.shift();
+        words.push(usedWord);
+        x = 1;
+        target.setAttribute('style', 'color:' + colors[0])
+        letterCount += x;
+        waiting = false;
+      }, 1000)
+    } else if (letterCount === words[0].length + 1 && waiting === false) {
+      waiting = true;
+      window.setTimeout(function() {
+        //x = -1;
+        letterCount += x;
+        waiting = false;
+      }, 1000)
+    } else if (waiting === false) {
+      target.innerHTML = words[0].substring(0, letterCount)
+      letterCount += x;
+    }
+  }, 120)
+  window.setInterval(function() {
+    if (visible === true) {
+      con.className = 'console-underscore hidden'
+      visible = false;
+
+    } else {
+      con.className = 'console-underscore'
+
+      visible = true;
+    }
+  }, 400)
+}
+</script>
+
