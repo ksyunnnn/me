@@ -177,6 +177,31 @@ body {
   }
 }
 
+#skill .the-skill {
+  display: flex;
+}
+#skill .the-skill .button-skill {
+  border: solid 5px;
+  border-radius: 1em;
+  padding: 2%;
+  text-align: center;
+  flex: 1 1 auto;
+  font-size: .6em;
+  margin: 0 1px;
+}
+#skill .the-skill .button-skill:hover {
+  cursor: pointer;
+  transition: all 0.25s ease;
+  border-color: #fff;
+  color: #111;
+  background: #fff;
+}
+#skill .the-skill .button-skill.active {
+  border-color: #fff;
+  color: #111;
+  background: #fff;
+}
+
 @keyframes fadeIn {
   0% {
     opacity: 0;
@@ -258,7 +283,19 @@ body i {
 
 
     <meta charset="utf-8">
-    <title>@ksyunnnn</title>
+    <title>syunsukekobashi.me</title>
+
+    <meta name="keywords" content="ksyunnnn,小橋俊介,こばしゅん" />
+    <meta name="description" content="About SYUNSUKE KOBASHI - @ksyunnnn" />
+    <meta name="author" content="@ksyunnnn" />
+    
+    <meta property="og:site_name" content="syunsukekobashi.me" />
+    <meta property="og:title" content="syunsukekobashi.me" />
+    <meta property="og:url" content="http://syunsukekobashi.me/" />
+    <meta property="og:description" content="About SYUNSUKE KOBASHI - @ksyunnnn" />
+    <meta property="og:type" content="article" />
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:creator" content="@ksyunnnn" />
 
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" integrity="sha384-wvfXpqpZZVQGK6TAh5PVlGOfQNHSoD2xbE+QkPxCAFlNEevoEH3Sl0sibVcOQVnN" crossorigin="anonymous">
     <link href="https://fonts.googleapis.com/css?family=Khula" rel="stylesheet" />
@@ -266,6 +303,7 @@ body i {
 
 </head>
 <body>
+
 
 
 
@@ -312,7 +350,14 @@ body i {
           </div>
         </div>
       </div>
-      <div id="skill" style="display:none"></div>
+      <div id="skill" style="display:none">
+        <div class="genre" v-for="(item, index) in display">
+          <h4>{{ item.title }}</h4>
+          <div class="the-skill">
+            <div class="button-skill" v-for="name in item.skill" v-bind:data="name" v-bind:class="{active:isActive}" v-on:click="isActive=!isActive">{{ name }}</div>
+          </div>
+        </div>
+      </div>
       <div id="components" style="display:none"></div>
       <div id="favorites" style="display:none"></div>
       <div id="hire" v-on:click="window.open('https://about.me/syunsukekobashi', '_blank');" ontouchstart="">
@@ -331,7 +376,7 @@ function getJson(uri) {
 
   // 書き直したいとこ
   var data = {
-    me: '{ "status": "OK", "uri": "me", "message": "This is about me,ksyunnnn.", "data": { "name": "SYUNSUKE KOBASHI", "gender": "male", "image": "https://pbs.twimg.com/profile_images/888337750939672576/HA1Stz8r_400x400.jpg","address": { "city": "Setagaya", "state": "Tokyo", "tel": "080-8884-1340" }, "url": { "facebook": "https://www.facebook.com/ksyunnnn", "medium": "https://medium.com/syunsukekobashi", "twitter": "https://twitter.com/ksyunnnn", "codepen": "https://codepen.io/ksyunnnn", "github": "https://github.com/ksyunnnn", "stackoverflow": "https://stackoverflow.com/users/7687813/kobashi-syunsuke", "qiita": "http://qiita.com/ksyunnnn", "wantedly": "https://www.wantedly.com/users/312856", "linkedin": "https://www.linkedin.com/in/ksyunnnn", "angellist": "https://angel.co/ksyunnnn", "aboutme": "https://about.me/kobashisyunsuke" } }}',roles:'{ "status": "OK", "uri": "me", "message": "This is about me,ksyunnnn.", "data": [ { "title": "web developer", "desc": "I am a developer who building web apps.", "image": "https://i.imgur.com/MeM2aBx.jpg" }, { "title": "community creator", "desc": "I have community that have 150 over people.", "image": "https://i.imgur.com/iaITmSx.jpg", "url": "https://techplay.jp/community/%E5%B0%8F%E6%A9%8B%20%E4%BF%8A%E4%BB%8B" } ]}'
+    me: '{ "status": "OK", "uri": "me", "message": "This is about me,ksyunnnn.", "data": { "name": "SYUNSUKE KOBASHI", "gender": "male", "image": "https://pbs.twimg.com/profile_images/888337750939672576/HA1Stz8r_400x400.jpg","address": { "city": "Setagaya", "state": "Tokyo", "tel": "080-8884-1340" }, "url": { "facebook": "https://www.facebook.com/ksyunnnn", "medium": "https://medium.com/syunsukekobashi", "twitter": "https://twitter.com/ksyunnnn", "codepen": "https://codepen.io/ksyunnnn", "github": "https://github.com/ksyunnnn", "stackoverflow": "https://stackoverflow.com/users/7687813/kobashi-syunsuke", "qiita": "http://qiita.com/ksyunnnn", "wantedly": "https://www.wantedly.com/users/312856", "linkedin": "https://www.linkedin.com/in/ksyunnnn", "angellist": "https://angel.co/ksyunnnn", "aboutme": "https://about.me/kobashisyunsuke" } }}',roles:'{ "status": "OK", "uri": "roles", "message": "This is about roles,ksyunnnn.", "data": [ { "title": "web developer", "desc": "I am a developer who building web apps.", "image": "https://i.imgur.com/MeM2aBx.jpg" }, { "title": "community creator", "desc": "I have community that have 150 over people.", "image": "https://i.imgur.com/iaITmSx.jpg", "url": "https://techplay.jp/community/%E5%B0%8F%E6%A9%8B%20%E4%BF%8A%E4%BB%8B" } ]}',skill:'{ "status": "OK", "uri": "skill", "message": "This is about skill,ksyunnnn.", "data": [ { "title": "Code", "skill": [ "PHP", "Ruby", "JavaScript", "Node.js", "Slim", "Pug", "SCSS" ] }, { "title": "Framework", "skill": [ "jQuery", "Vue.js", "Ruby on Rails", "Zend frameworks", "Express" ] }, { "title": "Tools", "skill": [ "Github", "Bitbucket", "GitLab" ] }, { "title": "MW", "skill": [ "Docker", "Vagrant", "EC2", "Route53" ] }] }'
   }
 
 
@@ -351,8 +396,9 @@ var app = new Vue({
   data: {
     uri: 'me',
     message: '',
-    display: '',
-    status: 'OK'
+    display: JSON.parse(getJson("skill")).data,
+    status: 'OK',
+    isActive: false
   },
   methods: {
     getUriByButton: function (event) {
